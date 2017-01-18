@@ -9,16 +9,18 @@ let regex = /x = (\d+)/;
 let url = 'http://localhost:4000';
 
 let code = readFileSync('./index.js').toString();
+let modifiedCode = code.replace('x = 0', 'x = 1');
 
-let modifiedCode = code.replace(
-  regex,
-  (match, digit) => `x = ${Number(digit) + 1}`
-);
-
-let [before] = code.match(regex);
-let [after] = modifiedCode.match(regex);
+let before = 'x = 0';
+let after = 'x = 1';
 
 request(url, testBefore);
+
+function testBefore(err, res, body) {
+  assert.equal(body, before);
+  console.log('before: test passed');
+  resume();
+}
 
 function resume() {
   // change the file outside docker
@@ -28,14 +30,13 @@ function resume() {
   setTimeout(() => request(url, testAfter), 2000);
 }
 
-function testBefore(err, res, body) {
-  assert.equal(body, before);
-  console.log('before: test passed');
-  resume();
-}
-
 function testAfter(err, res, body) {
   assert.equal(body, after);
   console.log('after: test passed');
+  finish();
 }
 
+function finish() {
+  // restore the original file contents
+  writeFileSync('./index.js', code);
+}

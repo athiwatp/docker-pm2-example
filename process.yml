@@ -1,0 +1,4 @@
+
+apps:
+  - script: 'index.js'
+    name: 'pm2-docker'

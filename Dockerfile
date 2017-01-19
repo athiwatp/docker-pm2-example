@@ -1,6 +1,6 @@
 FROM keymetrics/pm2-docker-alpine:latest
 
-ADD . /code
-WORKDIR /code
+ADD . /app
+WORKDIR /app
 RUN npm install
 CMD ["npm", "start"]

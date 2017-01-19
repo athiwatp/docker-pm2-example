@@ -1,6 +1,6 @@
 # Docker & PM2 Example
 
-Working example of using Docker Compose with a Node app, running under PM2 with watch enabled on a mounted volume.
+Working example of using [Docker Compose](https://docs.docker.com/compose/) with a Node app, running under [PM2](http://pm2.keymetrics.io/) with watch enabled on a mounted volume.
 
 1. Run `docker-compose up` to mount the volume and start the app
 2. Visit `localhost:4000` to verify that it is working

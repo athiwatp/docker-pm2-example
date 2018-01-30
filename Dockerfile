@@ -1,4 +1,4 @@
-FROM keymetrics/pm2-docker-alpine:latest
+FROM keymetrics/pm2:latest-alpine
 
 ADD . /app
 WORKDIR /app
